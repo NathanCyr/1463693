@@ -10,6 +10,12 @@ public class Parametres extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametres);
-        Log.d("MontEtiquette","Bonjour!");
+        Log.d("MontEtiquette",this.getResources().getString(R.string.Word));
+        if(this.getResources().getBoolean(R.bool.est_paysage)){
+            Log.d("MonEtiquette","Bonjour paysage!");
+        }else if(this.getResources().getBoolean(R.bool.est_portrait)){
+            Log.d("MonEtiquette","Bonjour portrait!");
+        }
+
     }
 }
