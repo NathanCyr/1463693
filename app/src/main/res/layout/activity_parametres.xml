@@ -1,18 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ca.cours5b5.nathancyr.vues.VParametres xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Parametres">
+    tools:context=".activites.AParametres"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
+        android:id="@+id/TextHauteur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="59dp"
+        android:layout_marginLeft="74dp"
+        android:layout_marginRight="59dp"
+        android:layout_marginStart="74dp"
+        android:text="@string/Hauteur"
+        app:layout_constraintBottom_toBottomOf="@+id/hauteurSpin"
+        app:layout_constraintEnd_toStartOf="@+id/hauteurSpin"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="133dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/TextLargeur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="57dp"
+        android:layout_marginLeft="74dp"
+        android:layout_marginRight="57dp"
+        android:layout_marginStart="74dp"
+        android:text="@string/Largeur"
+        app:layout_constraintBottom_toBottomOf="@+id/largeurSpin"
+        app:layout_constraintEnd_toStartOf="@+id/largeurSpin"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="210dp" />
+
+    <TextView
+        android:id="@+id/TextGagner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="74dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="74dp"
+        android:text="@string/Gagner"
+        app:layout_constraintBottom_toBottomOf="@+id/gagnerSpin"
+        app:layout_constraintEnd_toStartOf="@+id/gagnerSpin"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="293dp" />
+
+    <Spinner
+        android:id="@+id/largeurSpin"
+        android:layout_width="96dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/gagnerSpin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TextLargeur"
+        app:layout_constraintTop_toBottomOf="@+id/hauteurSpin"
+        tools:layout_editor_absoluteX="270dp"
+        tools:layout_editor_absoluteY="247dp" />
+
+    <Spinner
+        android:id="@+id/gagnerSpin"
+        android:layout_width="96dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TextGagner"
+        app:layout_constraintTop_toBottomOf="@+id/largeurSpin"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="372dp" />
+
+    <Spinner
+        android:id="@+id/hauteurSpin"
+        android:layout_width="96dp"
+        android:layout_height="29dp"
+        android:entries="@string/Largeur"
+        app:layout_constraintBottom_toTopOf="@+id/largeurSpin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TextHauteur"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+
+
+</ca.cours5b5.nathancyr.vues.VParametres>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Word">"Bonjour!"</string>
+    <string name="Hauteur">"Hauteur"</string>
+    <string name="Largeur">"Largeur"</string>
+    <string name="Gagner">"Pour gagner"</string>
 </resources>
