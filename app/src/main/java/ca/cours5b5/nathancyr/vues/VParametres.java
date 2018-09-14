@@ -10,6 +10,7 @@ import android.util.Log;
 import ca.cours5b5.nathancyr.global.GConstantes;
 
 public class VParametres extends ConstraintLayout{
+
     public VParametres(Context context) {
         super(context);
     }

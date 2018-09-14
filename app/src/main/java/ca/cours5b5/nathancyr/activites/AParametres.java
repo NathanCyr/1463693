@@ -5,7 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import ca.cours5b5.nathancyr.R;
-import android.content.intent;
+import android.content.Intent;
 
 
 public class AParametres extends Activite{
