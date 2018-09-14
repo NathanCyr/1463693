@@ -4,4 +4,5 @@
     <string name="Hauteur">"Height"</string>
     <string name="Largeur">"Width"</string>
     <string name="Gagner">"To win"</string>
+    <string name="BoutonParam">"Parameters</string>
 </resources>

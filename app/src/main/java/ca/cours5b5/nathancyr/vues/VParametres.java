@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import ca.cours5b5.nathancyr.R;
+import android.util.Log;
 import ca.cours5b5.nathancyr.global.GConstantes;
 
 public class VParametres extends ConstraintLayout{
@@ -21,9 +22,15 @@ public class VParametres extends ConstraintLayout{
         super(context, attrs, defStyleAttr);
     }
 
+    static{
+        Log.d("Atelier04", VParametres.class.getSimpleName() + "::static");
+    }
+
     @Override
     protected void onFinishInflate(){
         super.onFinishInflate();
+
+        Log.d("Atelier04", VParametres.class.getSimpleName() + "::onFinishInflate");
 
         Spinner hauteurSpin = this.findViewById(R.id.hauteurSpin);
         ArrayAdapter<Integer> adapterHauteur = new ArrayAdapter<>(this.getContext(), R.layout.support_simple_spinner_dropdown_item);
