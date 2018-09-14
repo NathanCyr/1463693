@@ -1,11 +1,16 @@
 package ca.cours5b5.nathancyr.activites;
 
-import android.support.v7.app.AppCompatActivity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+
+import org.json.JSONArray;
+
+import java.util.Map;
+
 import ca.cours5b5.nathancyr.R;
-import android.content.Intent;
+import ca.cours5b5.nathancyr.modeles.MParametres;
+import ca.cours5b5.nathancyr.serialisation.JSonification;
 
 
 public class AParametres extends Activite{
@@ -20,6 +25,12 @@ public class AParametres extends Activite{
         Log.d("Atelier04", AParametres.class.getSimpleName() + "::onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametres);
+
+        if(savedInstanceState != null){
+            String json = savedInstanceState.getString("MParametres");
+            Map<String, Object> objetJson = JSonification.enObjetJson(json);
+            MParametres.instance.aPartirObjetJson(objetJson);
+        }
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             Log.d("MonEtiquette",this.getResources().getString(R.string.Word)+ "(Paysage)");
@@ -42,7 +53,10 @@ public class AParametres extends Activite{
     protected void onSaveInstanceState(Bundle outState){
         Log.d("Atelier04", AParametres.class.getSimpleName() + "::onSaveInstanceState");
         super.onSaveInstanceState(outState);
-        outState.putInt("MaCle",18);
+        Map<String, Object> objetJson = MParametres.instance.enObjetJson();
+        String json = JSonification.enChaine(objetJson);
+        outState.putString("MParametres", json);
+        Log.d("Atelier05", json);
     }
     @Override
     protected void onDestroy(){

@@ -3,13 +3,16 @@ package ca.cours5b5.nathancyr.vues;
 import android.support.constraint.ConstraintLayout;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import ca.cours5b5.nathancyr.R;
 import android.util.Log;
 import ca.cours5b5.nathancyr.global.GConstantes;
+import ca.cours5b5.nathancyr.modeles.MParametres;
 
-public class VParametres extends ConstraintLayout{
+public class VParametres extends Vue{
 
     public VParametres(Context context) {
         super(context);
@@ -36,10 +39,20 @@ public class VParametres extends ConstraintLayout{
         Spinner hauteurSpin = this.findViewById(R.id.hauteurSpin);
         ArrayAdapter<Integer> adapterHauteur = new ArrayAdapter<>(this.getContext(), R.layout.support_simple_spinner_dropdown_item);
         hauteurSpin.setAdapter(adapterHauteur);
-        for(int i = GConstantes.HAUTEURMIN;i<=GConstantes.HAUTEURMAX;i++){
+        for(int i = MParametres.instance.getChoixHauteur().get(0); i<GConstantes.HAUTEURMAX; i++){
             adapterHauteur.add(i);
         }
-        hauteurSpin.setSelection(adapterHauteur.getPosition(GConstantes.HAUTEURDEF));
+        hauteurSpin.setSelection(adapterHauteur.getPosition(MParametres.instance.getHauteur()));
+        hauteurSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                Integer leChoix = (Integer) parent.getAdapter().getItem(position);
+                MParametres.instance.setHauteur(leChoix);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){
+            }
+        });
 
 
 
@@ -47,18 +60,39 @@ public class VParametres extends ConstraintLayout{
         Spinner largeurSpin = this.findViewById(R.id.largeurSpin);
         ArrayAdapter<Integer> adapterLargeur = new ArrayAdapter<>(this.getContext(), R.layout.support_simple_spinner_dropdown_item);
         largeurSpin.setAdapter(adapterLargeur);
-        for(int i = GConstantes.LARGEURMIN;i<=GConstantes.LARGEURMAX;i++){
+        for(int i = MParametres.instance.getChoixLargeur().get(0); i<GConstantes.LARGEURMAX; i++){
             adapterLargeur.add(i);
         }
-        largeurSpin.setSelection(adapterLargeur.getPosition(GConstantes.LARGEURDEF));
+        largeurSpin.setSelection(adapterLargeur.getPosition(MParametres.instance.getLargeur()));
+        largeurSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                Integer leChoix = (Integer) parent.getAdapter().getItem(position);
+                MParametres.instance.setLargeur(leChoix);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){
+            }
+        });
+
 
         Spinner gagnerSpin = this.findViewById(R.id.gagnerSpin);
         ArrayAdapter<Integer> adapterGagner = new ArrayAdapter<>(this.getContext(), R.layout.support_simple_spinner_dropdown_item);
         gagnerSpin.setAdapter(adapterGagner);
-        for(int i = GConstantes.GAGNERMIN;i<=GConstantes.GAGNERMAX;i++){
+        for(int i = MParametres.instance.getChoixPourGagner().get(0); i<GConstantes.GAGNERMAX; i++){
             adapterGagner.add(i);
         }
-        gagnerSpin.setSelection(adapterGagner.getPosition(GConstantes.GAGNERDEF));
+        gagnerSpin.setSelection(adapterGagner.getPosition(MParametres.instance.getPourGagner()));
+        gagnerSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                Integer leChoix = (Integer) parent.getAdapter().getItem(position);
+                MParametres.instance.setPourGagner(leChoix);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){
+            }
+        });
 
     }
 }
