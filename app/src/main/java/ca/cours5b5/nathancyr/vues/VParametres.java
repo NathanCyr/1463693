@@ -9,6 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import ca.cours5b5.nathancyr.R;
 import android.util.Log;
+
+import ca.cours5b5.nathancyr.controleurs.Action;
+import ca.cours5b5.nathancyr.controleurs.ControleurAction;
+import ca.cours5b5.nathancyr.global.GCommande;
 import ca.cours5b5.nathancyr.global.GConstantes;
 import ca.cours5b5.nathancyr.modeles.MParametres;
 
@@ -47,7 +51,9 @@ public class VParametres extends Vue{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
                 Integer leChoix = (Integer) parent.getAdapter().getItem(position);
-                MParametres.instance.setHauteur(leChoix);
+                Action actionHauteur = ControleurAction.demanderAction(GCommande.CHOISIR_HAUTEUR);
+                actionHauteur.setArguments(leChoix);
+                actionHauteur.executerDesQuePossible();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent){
@@ -68,7 +74,9 @@ public class VParametres extends Vue{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
                 Integer leChoix = (Integer) parent.getAdapter().getItem(position);
-                MParametres.instance.setLargeur(leChoix);
+                Action actionLargeur = ControleurAction.demanderAction(GCommande.CHOISIR_LARGEUR);
+                actionLargeur.setArguments(leChoix);
+                actionLargeur.executerDesQuePossible();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent){
@@ -87,7 +95,9 @@ public class VParametres extends Vue{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
                 Integer leChoix = (Integer) parent.getAdapter().getItem(position);
-                MParametres.instance.setPourGagner(leChoix);
+                Action actionPourGagner = ControleurAction.demanderAction(GCommande.CHOISIR_POUR_GAGNER);
+                actionPourGagner.setArguments(leChoix);
+                actionPourGagner.executerDesQuePossible();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent){

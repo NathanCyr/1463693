@@ -11,4 +11,5 @@ public class GConstantes {
     public static int GAGNERMAX = 4;
     public static int GAGNERDEF = 4;
 
+
 }

@@ -8,6 +8,9 @@ import java.util.Map;
 import ca.cours5b5.nathancyr.global.GConstantes;
 import ca.cours5b5.nathancyr.serialisation.AttributSerialisable;
 
+import static ca.cours5b5.nathancyr.global.GConstantes.HAUTEURMAX;
+import static ca.cours5b5.nathancyr.global.GConstantes.LARGEURMAX;
+
 public class MParametres extends Modele{
     public static MParametres instance = new MParametres();
 
@@ -81,10 +84,12 @@ public class MParametres extends Modele{
         this.pourGagner = pourGagner;
     }
 
+
+
     private void genererListesDeChoix(){
-        choixHauteur = genererListeChoix(GConstantes.HAUTEURMIN,GConstantes.HAUTEURMAX);
+        choixHauteur = genererListeChoix(GConstantes.HAUTEURMIN, HAUTEURMAX);
         choixLargeur = genererListeChoix(GConstantes.LARGEURMIN,GConstantes.LARGEURMAX);
-        choixPourGagner = genererListeChoix(GConstantes.GAGNERMIN,GConstantes.GAGNERMAX);
+        choixPourGagner = genererListeChoix(GConstantes.GAGNERMIN,(Math.max(HAUTEURMAX, LARGEURMAX) * 75 / 100));
     }
     private List<Integer> genererListeChoix(int min, int max){
         List<Integer> temp = new ArrayList<Integer>();

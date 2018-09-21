@@ -10,16 +10,24 @@ public class Action {
     ListenerFournisseur listenerFournisseur;
 
     Object[] args;
-
+    public Action action;
     public void setArguments(Object... args){
 
     }
 
     public void executerDesQuePossible(){
-
+        ControleurAction.executerDesQuePossible(action);
     }
 
     public Action cloner(){
-        return null;
+
+        if(args.length == 0){
+            action = null;
+        }else {
+           args.clone();
+           action = cloner();
+        }
+
+        return action;
     }
 }
