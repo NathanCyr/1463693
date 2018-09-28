@@ -2,9 +2,13 @@ package ca.cours5b5.nathancyr.controleurs.interfaces;
 
 import ca.cours5b5.nathancyr.modeles.Modele;
 
-public interface ListenerObservateur {
+public abstract class ListenerObservateur {
 
-    void reagirChangementAuModele(Modele modele);
+   public void reagirNouveauModele(Modele modele){
+
+   }
+
+   public abstract void reagirChangementAuModele(Modele modele);
 
 
 }

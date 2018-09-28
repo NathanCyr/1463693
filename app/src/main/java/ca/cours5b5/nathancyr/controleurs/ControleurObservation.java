@@ -17,7 +17,5 @@ public class ControleurObservation {
 
     }
 
-    public static void  lancerObservation(Modele modele){
 
-    }
 }
