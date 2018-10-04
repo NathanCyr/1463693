@@ -12,7 +12,7 @@ public class MPartie extends Modele {
     private final String __parametres = "parametres";
 
     public MPartie (MParametresPartie parametres){
-
+        this.parametres = getParametres();
     }
 
     public MParametresPartie getParametres() {

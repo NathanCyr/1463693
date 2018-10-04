@@ -10,15 +10,15 @@ import java.util.List;
 public class VGrille extends GridLayout{
 
     public VGrille(Context context){
-
+        super(context);
     }
 
     public VGrille(Context context, AttributeSet attrs){
-
+        super(context, attrs);
     }
 
     public VGrille(Context context, AttributeSet attrs, int defStyleAttr){
-
+        super(context, attrs, defStyleAttr);
     }
 
     private int nombreRangees;
@@ -31,7 +31,7 @@ public class VGrille extends GridLayout{
 
     @Override
     protected void onFinishInflate(){
-
+        super.onFinishInflate();
     }
 
     private void initialiser(){

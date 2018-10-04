@@ -64,13 +64,26 @@ public class MParametres extends Modele{
     }
 
     @Override
-    public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurDeSerialisation {
-
+    public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurDeSerialisation{
+        for(Map.Entry entry : objetJson.entrySet()){
+            if(entry.getKey().equals("hauteur")){
+                parametresPartie.hauteur = Integer.valueOf((String)entry.getValue());
+            }else if(entry.getKey().equals("largeur")){
+                parametresPartie.largeur = Integer.valueOf((String)entry.getValue());
+            }else if(entry.getKey().equals("pourGagner")){
+                parametresPartie.pourGagner=Integer.valueOf((String)entry.getValue());
+            }
+        }
     }
 
     @Override
     public Map<String, Object> enObjetJson() throws ErreurDeSerialisation{
-        return null;
+        Map<String, Object> objetJson = new HashMap<>();
+
+        objetJson.put("hauteur",parametresPartie.hauteur.toString());
+        objetJson.put("largeur",parametresPartie.largeur.toString());
+        objetJson.put("pourGagner",parametresPartie.pourGagner.toString());
+        return objetJson;
     }
 
 }

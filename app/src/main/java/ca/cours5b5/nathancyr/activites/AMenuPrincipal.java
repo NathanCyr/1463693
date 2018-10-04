@@ -21,6 +21,8 @@ public class AMenuPrincipal extends Activite {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menuprincipal);
 
+
+
     }
 
     @Override
