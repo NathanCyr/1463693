@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 
 public class VEntete extends AppCompatButton {
 
+    private int colonne;
+
     public VEntete(Context context){
         super(context);
     }
@@ -18,6 +20,10 @@ public class VEntete extends AppCompatButton {
         super(context, attrs, defStyleAttr);
     }
 
-    private int colonne;
 
+    public VEntete(Context context, int colonne){
+        super(context);
+        this.colonne = colonne;
+        setText("" + colonne);
+    }
 }

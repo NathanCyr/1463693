@@ -2,6 +2,8 @@ package ca.cours5b5.nathancyr.vues;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class VGrille extends GridLayout{
 
     @Override
     protected void onFinishInflate(){
+
+        Log.d("Atelier06", "VGrille::onFinishInflate");
         super.onFinishInflate();
     }
 
@@ -39,7 +43,8 @@ public class VGrille extends GridLayout{
     }
 
     void creerGrille(int hauteur, int largeur){
-
+        ajouterEnTetes(largeur);
+        ajouterCases(hauteur, largeur);
     }
 
     private void initialiserColonnes(int largeur){
@@ -48,18 +53,54 @@ public class VGrille extends GridLayout{
 
     private void ajouterEnTetes(int largeur){
 
+        for(int i = 0; i < largeur; i++){
+            VEntete entete = new VEntete(getContext(),i);
+            addView(entete,getMiseEnPageEntete(i));
+        }
+
     }
 
     private LayoutParams getMiseEnPageEntete(int colonne){
-        return null;
+        int rangee= 0;
+        float poidsRangee = 3;
+        float poidsColonne = 3;
+
+        Spec specRangee = GridLayout.spec(rangee, poidsRangee);
+        Spec specColonne = GridLayout.spec(colonne,poidsColonne);
+
+        LayoutParams layParam = new LayoutParams(specRangee, specColonne);
+
+        layParam.width=0;
+        layParam.height=0;
+        layParam.setGravity(Gravity.FILL);
+
+        return layParam;
     }
 
     private void ajouterCases(int hauteur, int largeur){
-
+        for(int i = 1; i < hauteur+1; i++){
+            for(int j=0; j<largeur;++j) {
+                VCase caseTemp= new VCase(getContext(), j, (hauteur-i));
+                addView(caseTemp, getMiseEnPageCase(i, j));
+            }
+        }
     }
 
     private LayoutParams getMiseEnPageCase(int rangee, int colonne){
-        return null;
+
+        float poidsRangee = 1;
+        float poidsColonne = 1;
+
+        Spec specRangee = GridLayout.spec(rangee, poidsRangee);
+        Spec specColonne = GridLayout.spec(colonne,poidsColonne);
+
+        LayoutParams layParam = new LayoutParams(specRangee, specColonne);
+
+        layParam.width=0;
+        layParam.height=0;
+        layParam.setGravity(Gravity.FILL);
+
+        return layParam;
     }
 
 }

@@ -6,16 +6,32 @@ import android.util.AttributeSet;
 
 public class VCase extends AppCompatButton {
 
+    private int rangee;
+    private int colonne;
+
     public VCase(Context context){
+
         super(context);
+        setEnabled(false);
     }
 
     public VCase(Context context, AttributeSet attrs){
+
         super(context, attrs);
+        setEnabled(false);
     }
 
     public VCase(Context context, AttributeSet attrs, int defStyleAttr){
         super(context, attrs, defStyleAttr);
+        setEnabled(false);
+    }
+
+    public VCase(Context context, int rangee, int colonne){
+        super(context);
+        setEnabled(false);
+        this.rangee = rangee;
+        this.colonne = colonne;
+        setText("" + rangee + "," + colonne);
     }
 
 }

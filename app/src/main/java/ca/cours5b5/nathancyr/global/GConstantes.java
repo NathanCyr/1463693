@@ -12,4 +12,5 @@ public class GConstantes {
     public static int GAGNERDEF = 4;
 
 
+
 }

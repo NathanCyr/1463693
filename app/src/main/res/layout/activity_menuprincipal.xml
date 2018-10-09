@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ca.cours5b5.nathancyr.vues.VMenuPrincipal
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <Button
         android:id="@+id/bouton_parametres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="goToAnActivity"
         android:text="@string/BoutonParam"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,11 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bouton_partie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="goToAnActivity"
-        android:text="string/BoutonPartie"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="301dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Partie"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bouton_parametres" />
+</ca.cours5b5.nathancyr.vues.VMenuPrincipal>

@@ -2,6 +2,7 @@ package ca.cours5b5.nathancyr.controleurs;
 
 import java.util.HashMap;
 import java.util.Map;
+import android.util.Log;
 
 import ca.cours5b5.nathancyr.controleurs.interfaces.ListenerObservateur;
 import ca.cours5b5.nathancyr.modeles.MParametres;
@@ -18,6 +19,7 @@ public class ControleurObservation {
     }
 
     public static void  observerModele(String nomModele, final ListenerObservateur listenerObservateur){
+        Log.d("Ateliero06", "ControleurObservation::observerModele");
         if(nomModele.equals("MParametres")){
             observations.put(MParametres.instance, listenerObservateur);
             lancerObservationPremiereFois(MParametres.instance);

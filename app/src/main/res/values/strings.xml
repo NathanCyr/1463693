@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">NathanCyr</string>
+    <string name="Word">"Bonjour!"</string>
+    <string name="BoutonParam">string@BoutonParam</string>
+    <string name="Hauteur">YourText</string>
+    <string name="Largeur">YourText</string>
+    <string name="Gagner">YourText</string>
+
 </resources>
