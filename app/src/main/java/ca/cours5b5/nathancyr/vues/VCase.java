@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
+import ca.cours5b5.nathancyr.global.GCouleur;
+
 public class VCase extends AppCompatButton {
 
     private int rangee;
@@ -32,6 +34,10 @@ public class VCase extends AppCompatButton {
         this.rangee = rangee;
         this.colonne = colonne;
         setText("" + rangee + "," + colonne);
+    }
+
+    public void afficherJeton(GCouleur jeton){
+
     }
 
 }

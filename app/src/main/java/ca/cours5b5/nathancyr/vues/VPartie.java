@@ -72,4 +72,7 @@ public class VPartie extends Vue{
 
     }
 
+    private void miseAJourGrille(MPartie partie){
+
+    }
 }
