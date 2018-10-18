@@ -53,14 +53,11 @@ public class VPartie extends Vue{
 
             @Override
             public void reagirChangementAuModele(Modele modele){
-                afficherParametres((MPartie) modele);
+                miseAJourGrille((MPartie) modele);
             }
         });
     }
 
-    private MPartie getPartie(Modele modele){
-        return null;
-    }
 
     private void initialiserGrille(MPartie mPartie){
         int hauteur = mPartie.getParametres().getHauteur();
@@ -68,11 +65,9 @@ public class VPartie extends Vue{
         grille.creerGrille(hauteur, largeur);
     }
 
-    private void afficherParametres(MPartie partie){
-
-    }
 
     private void miseAJourGrille(MPartie partie){
-
+        Log.d("Atelier07", "MiseAJour");
+        grille.afficherJetons(partie.getGrille());
     }
 }

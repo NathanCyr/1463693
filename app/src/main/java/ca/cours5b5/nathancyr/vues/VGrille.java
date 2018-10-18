@@ -4,12 +4,17 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cours5b5.nathancyr.controleurs.Action;
+import ca.cours5b5.nathancyr.controleurs.ControleurAction;
+import ca.cours5b5.nathancyr.global.GCommande;
 import ca.cours5b5.nathancyr.global.GCouleur;
+import ca.cours5b5.nathancyr.modeles.MColonne;
 import ca.cours5b5.nathancyr.modeles.MGrille;
 
 public class VGrille extends GridLayout{
@@ -26,11 +31,9 @@ public class VGrille extends GridLayout{
         super(context, attrs, defStyleAttr);
     }
 
-    private int nombreRangees;
+    private Action actionEnTete;
 
-    private class Colonne extends ArrayList<VCase>{}
-
-    private List<Colonne> colonnesDeCases;
+    private VCase[][] cases;
 
     private List<VEntete> entetes;
 
@@ -41,17 +44,12 @@ public class VGrille extends GridLayout{
         super.onFinishInflate();
     }
 
-    private void initialiser(){
 
-    }
+    void creerGrille(int hauteur, int largeur) {
 
-    void creerGrille(int hauteur, int largeur){
+        cases = new VCase[hauteur][largeur];
         ajouterEnTetes(largeur);
         ajouterCases(hauteur, largeur);
-    }
-
-    private void initialiserColonnes(int largeur){
-
     }
 
     private void ajouterEnTetes(int largeur){
@@ -59,8 +57,9 @@ public class VGrille extends GridLayout{
         for(int i = 0; i < largeur; i++){
             VEntete entete = new VEntete(getContext(),i);
             addView(entete,getMiseEnPageEntete(i));
+            installerListenerEntete(entete, i);
         }
-
+        demanderActionEntete();
     }
 
     private LayoutParams getMiseEnPageEntete(int colonne){
@@ -85,6 +84,7 @@ public class VGrille extends GridLayout{
             for(int j=0; j<largeur;++j) {
                 VCase caseTemp= new VCase(getContext(), j, (hauteur-i));
                 addView(caseTemp, getMiseEnPageCase(i, j));
+                cases[hauteur - i][j] = caseTemp;
             }
         }
     }
@@ -107,19 +107,34 @@ public class VGrille extends GridLayout{
     }
 
     private void demanderActionEntete(){
-
+        actionEnTete = ControleurAction.demanderAction(GCommande.JOUER_COUP_ICI);
     }
 
     private void installerListenerEntete(VEntete entete, final int colonne){
-
+        entete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionEnTete.setArguments(colonne);
+                actionEnTete.executerDesQuePossible();
+            }
+        });
     }
 
     void afficherJetons(MGrille grille){
 
+        List<MColonne> listeColonnes = grille.getColonnes();
+
+        for(int colonne = 0; colonne < listeColonnes.size(); colonne++){
+            MColonne colonneActuelle = listeColonnes.get(colonne);
+
+            for(int rangee = 0; rangee < colonneActuelle.getJetons().size(); rangee++){
+                afficherJeton(colonne, rangee, colonneActuelle.getJetons().get(rangee));
+            }
+        }
     }
 
     private void afficherJeton(int colonne, int rangee, GCouleur jeton){
-
+        cases[rangee][colonne].afficherJeton(jeton);
     }
 
 }
