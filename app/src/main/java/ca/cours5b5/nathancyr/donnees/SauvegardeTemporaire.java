@@ -1,6 +1,7 @@
 package ca.cours5b5.nathancyr.donnees;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.Map;
 
@@ -17,10 +18,11 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
 
     @Override
     public Map<String, Object> chargerModele(String cheminSauvegarde) {
+        String cle = getCle(cheminSauvegarde);
 
         if(bundle != null && bundle.containsKey(cheminSauvegarde)){
 
-            String json = bundle.getString(cheminSauvegarde);
+            String json = bundle.getString(cle);
 
             Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
 
@@ -35,12 +37,18 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
 
     @Override
     public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson) {
-        if(bundle != null){
+        String cle = getCle(cheminSauvegarde);
 
+        Log.d("Atelier 11: ", "sauvegardeTemporaire");
+        if(bundle != null){
             String json = Jsonification.enChaineJson(objetJson);
-            bundle.putString(cheminSauvegarde, json);
+            bundle.putString(cle, json);
 
         }
+    }
+
+    private String getCle(String cheminSauvegarde){
+        return getNomModele(cheminSauvegarde);
     }
 
 }

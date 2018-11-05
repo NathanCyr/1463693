@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ca.cours5b5.nathancyr.controleurs.interfaces.Fournisseur;
+import ca.cours5b5.nathancyr.donnees.Serveur;
 import ca.cours5b5.nathancyr.donnees.SourceDeDonnees;
 import ca.cours5b5.nathancyr.exceptions.ErreurModele;
 import ca.cours5b5.nathancyr.modeles.MParametres;
@@ -13,6 +14,7 @@ import ca.cours5b5.nathancyr.modeles.MParametresPartie;
 import ca.cours5b5.nathancyr.modeles.MPartie;
 import ca.cours5b5.nathancyr.modeles.Modele;
 import ca.cours5b5.nathancyr.donnees.Disque;
+import ca.cours5b5.nathancyr.usagers.UsagerCourant;
 
 public final class ControleurModeles {
 
@@ -30,9 +32,17 @@ public final class ControleurModeles {
 
         listeDeSauvegardes = new ArrayList<>();
         listeDeSauvegardes.add(Disque.getInstance());
+        listeDeSauvegardes.add(Serveur.getInstance());
 
     }
 
+    private static String getCheminSauvegarger(String nomModele){
+        String resultat;
+
+        resultat = nomModele + "/" + UsagerCourant.getId();
+
+        return resultat;
+    }
     public static void setSequenceDeChargement(SourceDeDonnees... sequenceDeChargement){
 
         ControleurModeles.sequenceDeChargement = sequenceDeChargement;
