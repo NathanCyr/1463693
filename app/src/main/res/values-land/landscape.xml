@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <bool name="est_paysage">true</bool>
-    <bool name="est_portrait">false</bool>
-</resources>

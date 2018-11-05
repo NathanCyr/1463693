@@ -2,48 +2,47 @@ package ca.cours5b5.nathancyr.controleurs;
 
 import java.util.HashMap;
 import java.util.Map;
-import android.util.Log;
 
 import ca.cours5b5.nathancyr.controleurs.interfaces.ListenerObservateur;
-import ca.cours5b5.nathancyr.modeles.MParametres;
-import ca.cours5b5.nathancyr.modeles.MPartie;
 import ca.cours5b5.nathancyr.modeles.Modele;
 
-public class ControleurObservation {
+public final class ControleurObservation {
+
+    private ControleurObservation(){}
 
     private static Map<Modele, ListenerObservateur> observations;
-    public static MPartie partie;
 
-    static{
-    observations = new HashMap<>();
-    }
+    static {
 
-    public static void  observerModele(String nomModele, final ListenerObservateur listenerObservateur){
-        Log.d("Ateliero06", "ControleurObservation::observerModele");
-        if(nomModele.equals("MParametres")){
-            observations.put(MParametres.instance, listenerObservateur);
-            lancerObservationPremiereFois(MParametres.instance);
-        }else{
-            partie = new MPartie(MParametres.instance.getParametresPartie().cloner());
-            observations.put(ControleurObservation.partie, listenerObservateur);
-            lancerObservationPremiereFois(ControleurObservation.partie);
-        }
+        observations = new HashMap<>();
 
     }
 
-    public static void lancerObservation(Modele modele){
-        ListenerObservateur listenerObservateur = observations.get(modele);
-        if(listenerObservateur != null){
+    public static void observerModele(String nomModele, final ListenerObservateur listenerObservateur) {
+
+        Modele modele = ControleurModeles.getModele(nomModele);
+
+        observations.put(modele, listenerObservateur);
+
+        listenerObservateur.reagirNouveauModele(modele);
+
+    }
+
+    public static void lancerObservation(Modele modele) {
+
+        final ListenerObservateur listenerObservateur = observations.get(modele);
+
+        if (listenerObservateur != null) {
+
             listenerObservateur.reagirChangementAuModele(modele);
+
         }
     }
 
-    public static void lancerObservationPremiereFois(Modele modele){
-        ListenerObservateur listenerObservateur = observations.get(modele);
-        if(listenerObservateur != null){
-            listenerObservateur.reagirNouveauModele(modele);
-        }
-    }
+    public static void detruireObservation(Modele modele) {
 
+        observations.remove(modele);
+
+    }
 
 }

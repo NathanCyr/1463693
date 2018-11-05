@@ -8,92 +8,86 @@
     tools:layout_editor_absoluteY="81dp">
 
     <TextView
-        android:id="@+id/TextHauteur"
+        android:id="@+id/texte_hauteur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="59dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginRight="59dp"
-        android:layout_marginStart="74dp"
-        android:text="@string/Hauteur"
-        app:layout_constraintBottom_toBottomOf="@+id/hauteurSpin"
-        app:layout_constraintEnd_toStartOf="@+id/hauteurSpin"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="133dp" />
-
-    <TextView
-        android:id="@+id/TextLargeur"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="57dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginRight="57dp"
-        android:layout_marginStart="74dp"
-        android:text="@string/Largeur"
-        app:layout_constraintBottom_toBottomOf="@+id/largeurSpin"
-        app:layout_constraintEnd_toStartOf="@+id/largeurSpin"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="210dp" />
-
-    <TextView
-        android:id="@+id/TextGagner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginStart="74dp"
-        android:text="@string/Gagner"
-        app:layout_constraintBottom_toBottomOf="@+id/gagnerSpin"
-        app:layout_constraintEnd_toStartOf="@+id/gagnerSpin"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="293dp" />
-
-    <Spinner
-        android:id="@+id/largeurSpin"
-        android:layout_width="96dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/gagnerSpin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/TextLargeur"
-        app:layout_constraintTop_toBottomOf="@+id/hauteurSpin"
-        tools:layout_editor_absoluteX="270dp"
-        tools:layout_editor_absoluteY="247dp" />
-
-    <Spinner
-        android:id="@+id/gagnerSpin"
-        android:layout_width="96dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/hauteur"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/TextGagner"
-        app:layout_constraintTop_toBottomOf="@+id/largeurSpin"
-        tools:layout_editor_absoluteX="264dp"
-        tools:layout_editor_absoluteY="372dp" />
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18" />
+
+    <TextView
+        android:id="@+id/texte_largeur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/largeur"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/texte_hauteur"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texte_hauteur"
+        app:layout_constraintVertical_bias="0.100000024" />
+
+    <TextView
+        android:id="@+id/texte_pour_gagner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pour_gagner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/texte_largeur"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texte_largeur"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <Spinner
-        android:id="@+id/hauteurSpin"
-        android:layout_width="96dp"
-        android:layout_height="29dp"
-        android:entries="@string/Largeur"
-        app:layout_constraintBottom_toTopOf="@+id/largeurSpin"
+        android:id="@+id/spinner_hauteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:minWidth="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/texte_hauteur"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/TextHauteur"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toEndOf="@+id/texte_hauteur"
+        app:layout_constraintTop_toTopOf="@+id/texte_hauteur" />
 
+    <Spinner
+        android:id="@+id/spinner_largeur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:minWidth="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/texte_largeur"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/spinner_hauteur"
+        app:layout_constraintTop_toTopOf="@+id/texte_largeur" />
 
+    <Spinner
+        android:id="@+id/spinner_pour_gagner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:minWidth="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/texte_pour_gagner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/spinner_largeur"
+        app:layout_constraintTop_toTopOf="@+id/texte_pour_gagner" />
 
 </ca.cours5b5.nathancyr.vues.VParametres>

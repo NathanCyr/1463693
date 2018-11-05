@@ -1,5 +1,7 @@
 package ca.cours5b5.nathancyr.global;
 
+
+
 public enum GCommande {
 
     CHOISIR_HAUTEUR,
@@ -7,7 +9,8 @@ public enum GCommande {
     CHOISIR_POUR_GAGNER,
 
     OUVRIR_MENU_PARAMETRES,
-    OUVRIR_MENU_PARTIE,
+    DEMARRER_PARTIE,
 
     JOUER_COUP_ICI,
+
 }

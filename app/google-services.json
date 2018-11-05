@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "841110843378",
+    "firebase_url": "https://nathancyrandroid.firebaseio.com",
+    "project_id": "nathancyrandroid",
+    "storage_bucket": "nathancyrandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841110843378:android:586cb098e7b7a755",
+        "android_client_info": {
+          "package_name": "ca.cours5b5.nathancyr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841110843378-ka44p4k0oetmkun7r01i76sk14tmoo10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.cours5b5.nathancyr",
+            "certificate_hash": "8cf71eb9e2792d15daa19c2c113aaea0da048fb6"
+          }
+        },
+        {
+          "client_id": "841110843378-508nvt3e461idtbfb8pmh4r648rtlvn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZlQzNW5f6_vY3KptK1kd1d2VJ71TJGhQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841110843378-508nvt3e461idtbfb8pmh4r648rtlvn6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

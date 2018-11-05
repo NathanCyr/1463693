@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="Word">"Hello!"</string>
-    <string name="Hauteur">"Height"</string>
-    <string name="Largeur">"Width"</string>
-    <string name="Gagner">"To win"</string>
-    <string name="BoutonParam">"Parameters</string>
-</resources>
