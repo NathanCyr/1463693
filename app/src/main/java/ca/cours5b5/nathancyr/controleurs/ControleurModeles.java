@@ -7,6 +7,7 @@ import java.util.Map;
 
 import ca.cours5b5.nathancyr.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.nathancyr.controleurs.interfaces.ListenerGetModele;
+import ca.cours5b5.nathancyr.donnees.ListenerChargement;
 import ca.cours5b5.nathancyr.donnees.Serveur;
 import ca.cours5b5.nathancyr.donnees.SourceDeDonnees;
 import ca.cours5b5.nathancyr.exceptions.ErreurModele;
@@ -80,29 +81,6 @@ public final class ControleurModeles {
         return modele;
     }
 
-
-    private static Modele chargerViaSequenceDeChargement(final String nomModele) {
-
-        Modele modele = creerModeleSelonNom(nomModele);
-
-        modelesEnMemoire.put(nomModele, modele);
-
-        for (SourceDeDonnees sourceDeDonnees : sequenceDeChargement) {
-
-            Map<String, Object> objetJson = sourceDeDonnees.chargerModele(nomModele);
-
-            if (objetJson != null) {
-
-                modele.aPartirObjetJson(objetJson);
-                break;
-
-            }
-
-        }
-
-        return modele;
-    }
-
     public static void sauvegarderModele(String nomModele) throws ErreurModele {
 
         for (SourceDeDonnees source : listeDeSauvegardes) {
@@ -167,11 +145,11 @@ public final class ControleurModeles {
         });
     }
 
-    private static void chargerViaSequence(Modele modele, String cheminSauvegarde, ListenerGetModele listenerGetModele, int ind) {
+    private static void chargementViaSequence(Modele modele, String cheminSauvegarde, ListenerGetModele listenerGetModele, int ind) {
         if (ind >= sequenceDeChargement.length) {
-            terminerChargemnet(modele, listenerGetModele);
+            terminerChargement(modele, listenerGetModele);
         } else {
-            chargementViaSourceCouranteOuSuivante(modele, cheminSauvegarde, listeDeSauvegardes, ind);
+            chargementViaSourceCouranteOuSuivante(modele, cheminSauvegarde, listenerGetModele, ind);
         }
     }
 
@@ -183,7 +161,32 @@ public final class ControleurModeles {
                 terminerChargementAvecDonnees(objetJson, modele, listenerGetModele);
             }
 
+            @Override
+            public void reagirErreur(Exception e) {
+                chargementViaSourceSuivante(modele, cheminSauvegarde, listenerGetModele, ind);
+            }
+
         });
+    }
+
+    private static void terminerChargementAvecDonnees(Map<String, Object> objetJson, Modele modele, ListenerGetModele listenerGetModele){
+        modele.aPartirObjetJson(objetJson);
+        terminerChargement(modele, listenerGetModele);
+    }
+
+    private static void chargementViaSourceSuivante(Modele modele, String cheminSauvegarde, ListenerGetModele listenerGetModele, int ind){
+        chargementViaSequence(modele, cheminSauvegarde, listenerGetModele, ind);
+    }
+
+    private static void chargerDonnees(Modele modele, String nomModele, ListenerGetModele listenerGetModele){
+        String chemin = getCheminSauvegarger(nomModele);
+        int indice = 0;
+
+        chargementViaSequence(modele, chemin, listenerGetModele, indice);
+    }
+
+    private static void terminerChargement(Modele modele, ListenerGetModele listenerGetModele){
+        listenerGetModele.reagirAuModele(modele);
     }
 
 }

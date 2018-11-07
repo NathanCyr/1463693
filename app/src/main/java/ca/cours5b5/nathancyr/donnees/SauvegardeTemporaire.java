@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.Map;
 
 
+import ca.cours5b5.nathancyr.exceptions.ErreurModele;
 import ca.cours5b5.nathancyr.serialisation.Jsonification;
 
 public class SauvegardeTemporaire extends SourceDeDonnees {
@@ -17,7 +18,7 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     }
 
     @Override
-    public Map<String, Object> chargerModele(String cheminSauvegarde) {
+    public void chargerModele(String cheminSauvegarde, ListenerChargement listenerChargement) {
         String cle = getCle(cheminSauvegarde);
 
         if(bundle != null && bundle.containsKey(cheminSauvegarde)){
@@ -26,11 +27,11 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
 
             Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
 
-            return objetJson;
+            listenerChargement.reagirSucces(objetJson);
 
         }else{
 
-            return null;
+            listenerChargement.reagirErreur(new ErreurModele("Clef inexistante"));
 
         }
     }
@@ -48,6 +49,7 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     }
 
     private String getCle(String cheminSauvegarde){
+
         return getNomModele(cheminSauvegarde);
     }
 
