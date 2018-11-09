@@ -12,7 +12,6 @@ import ca.cours5b5.nathancyr.donnees.Serveur;
 import ca.cours5b5.nathancyr.donnees.SourceDeDonnees;
 import ca.cours5b5.nathancyr.exceptions.ErreurModele;
 import ca.cours5b5.nathancyr.modeles.MParametres;
-import ca.cours5b5.nathancyr.modeles.MParametresPartie;
 import ca.cours5b5.nathancyr.modeles.MPartie;
 import ca.cours5b5.nathancyr.modeles.Modele;
 import ca.cours5b5.nathancyr.donnees.Disque;
@@ -39,7 +38,7 @@ public final class ControleurModeles {
 
     }
 
-    private static String getCheminSauvegarger(String nomModele) {
+    private static String getCheminSauvegarder(String nomModele) {
         String resultat;
 
         resultat = nomModele + "/" + UsagerCourant.getId();
@@ -56,6 +55,7 @@ public final class ControleurModeles {
     public static void sauvegarderModeleDansCetteSource(String nomModele, SourceDeDonnees sourceDeDonnees) {
 
         Modele modele = modelesEnMemoire.get(nomModele);
+
 
         if (modele != null) {
 
@@ -117,24 +117,6 @@ public final class ControleurModeles {
         }
     }
 
-    public static void detruireModele(String nomModele) {
-
-        Modele modele = modelesEnMemoire.get(nomModele);
-
-        if (modele != null) {
-
-            modelesEnMemoire.remove(nomModele);
-
-            ControleurObservation.detruireObservation(modele);
-
-            if (modele instanceof Fournisseur) {
-
-                ControleurAction.oublierFournisseur((Fournisseur) modele);
-
-            }
-        }
-    }
-
     private static void creerModeleEtChargerDonnees(final String nomModele, final ListenerGetModele listenerGetModele) {
         creerModeleSelonNom(nomModele, new ListenerGetModele() {
             @Override
@@ -175,11 +157,11 @@ public final class ControleurModeles {
     }
 
     private static void chargementViaSourceSuivante(Modele modele, String cheminSauvegarde, ListenerGetModele listenerGetModele, int ind){
-        chargementViaSequence(modele, cheminSauvegarde, listenerGetModele, ind);
+        chargementViaSequence(modele, cheminSauvegarde, listenerGetModele, ind + 1);
     }
 
     private static void chargerDonnees(Modele modele, String nomModele, ListenerGetModele listenerGetModele){
-        String chemin = getCheminSauvegarger(nomModele);
+        String chemin = getCheminSauvegarder(nomModele);
         int indice = 0;
 
         chargementViaSequence(modele, chemin, listenerGetModele, indice);
@@ -187,6 +169,24 @@ public final class ControleurModeles {
 
     private static void terminerChargement(Modele modele, ListenerGetModele listenerGetModele){
         listenerGetModele.reagirAuModele(modele);
+    }
+
+    public static void detruireModele(String nomModele) {
+
+        Modele modele = modelesEnMemoire.get(nomModele);
+
+        if (modele != null) {
+
+            modelesEnMemoire.remove(nomModele);
+
+            ControleurObservation.detruireObservation(modele);
+
+            if (modele instanceof Fournisseur) {
+
+                ControleurAction.oublierFournisseur((Fournisseur) modele);
+
+            }
+        }
     }
 
 }
