@@ -38,14 +38,6 @@ public final class ControleurModeles {
 
     }
 
-    private static String getCheminSauvegarder(String nomModele) {
-        String resultat;
-
-        resultat = nomModele + "/" + UsagerCourant.getId();
-
-        return resultat;
-    }
-
     public static void setSequenceDeChargement(SourceDeDonnees... sequenceDeChargement) {
 
         ControleurModeles.sequenceDeChargement = sequenceDeChargement;
@@ -56,17 +48,18 @@ public final class ControleurModeles {
 
         Modele modele = modelesEnMemoire.get(nomModele);
 
+        String cheminDeSauvegarde = getCheminSauvegarde(nomModele);
 
         if (modele != null) {
 
             Map<String, Object> objetJson = modele.enObjetJson();
 
-            sourceDeDonnees.sauvegarderModele(nomModele, objetJson);
+            sourceDeDonnees.sauvegarderModele(cheminDeSauvegarde, objetJson);
 
         }
     }
 
-    static Modele getModele(final String nomModele, ListenerGetModele listenerGetModele) {
+    static void getModele(final String nomModele, ListenerGetModele listenerGetModele) {
 
         Modele modele = modelesEnMemoire.get(nomModele);
 
@@ -77,8 +70,6 @@ public final class ControleurModeles {
         } else {
             listenerGetModele.reagirAuModele(modele);
         }
-
-        return modele;
     }
 
     public static void sauvegarderModele(String nomModele) throws ErreurModele {
@@ -96,8 +87,8 @@ public final class ControleurModeles {
 
         if (nomModele.equals(MParametres.class.getSimpleName())) {
 
-            MParametres parametres = new MParametres();
-            listenerGetModele.reagirAuModele(parametres);
+            MParametres mParametres = new MParametres();
+            listenerGetModele.reagirAuModele(mParametres);
 
         } else if (nomModele.equals(MPartie.class.getSimpleName())) {
 
@@ -161,7 +152,7 @@ public final class ControleurModeles {
     }
 
     private static void chargerDonnees(Modele modele, String nomModele, ListenerGetModele listenerGetModele){
-        String chemin = getCheminSauvegarder(nomModele);
+        String chemin = getCheminSauvegarde(nomModele);
         int indice = 0;
 
         chargementViaSequence(modele, chemin, listenerGetModele, indice);
@@ -170,6 +161,7 @@ public final class ControleurModeles {
     private static void terminerChargement(Modele modele, ListenerGetModele listenerGetModele){
         listenerGetModele.reagirAuModele(modele);
     }
+
 
     public static void detruireModele(String nomModele) {
 
@@ -188,5 +180,14 @@ public final class ControleurModeles {
             }
         }
     }
+
+    private static String getCheminSauvegarde(String nomModele) {
+        String resultat;
+
+        resultat = nomModele + "/" + UsagerCourant.getId();
+
+        return resultat;
+    }
+
 
 }

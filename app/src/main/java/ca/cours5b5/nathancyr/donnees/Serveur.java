@@ -1,5 +1,7 @@
 package ca.cours5b5.nathancyr.donnees;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,13 +25,6 @@ public class Serveur extends SourceDeDonnees {
     }
 
     @Override
-    public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(cheminSauvegarde);
-
-        ref.setValue(objetJson);
-    }
-
-    @Override
     public void chargerModele(String cheminSauvegarde, final ListenerChargement listenerChargement){
         DatabaseReference noeud = FirebaseDatabase.getInstance().getReference(cheminSauvegarde);
         noeud.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -49,6 +44,14 @@ public class Serveur extends SourceDeDonnees {
             }
         });
     }
+
+    @Override
+    public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson){
+        DatabaseReference noeud = FirebaseDatabase.getInstance().getReference(cheminSauvegarde);
+
+        noeud.setValue(objetJson);
+    }
+
 
 
 

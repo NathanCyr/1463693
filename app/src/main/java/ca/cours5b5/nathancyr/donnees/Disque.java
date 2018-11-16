@@ -42,6 +42,8 @@ public final class Disque extends SourceDeDonnees {
 
             Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
 
+            listenerChargement.reagirSucces(objetJson);
+
         } catch (IOException e) {
 
             listenerChargement.reagirErreur(e);

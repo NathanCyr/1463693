@@ -21,17 +21,16 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     public void chargerModele(String cheminSauvegarde, ListenerChargement listenerChargement) {
         String cle = getCle(cheminSauvegarde);
 
-        if(bundle != null && bundle.containsKey(cheminSauvegarde)){
-
-            String json = bundle.getString(cle);
-
-            Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
-
-            listenerChargement.reagirSucces(objetJson);
-
-        }else{
-
-            listenerChargement.reagirErreur(new ErreurModele("Clef inexistante"));
+        try {
+            if(bundle != null && bundle.containsKey(cheminSauvegarde)){
+                String json = bundle.getString(cheminSauvegarde);
+                Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
+                listenerChargement.reagirSucces(objetJson);
+            }else{
+                listenerChargement.reagirErreur(new ErreurModele("Clé non trouvée"));
+            }
+        }catch (Exception e){
+            listenerChargement.reagirErreur(e);
 
         }
     }
