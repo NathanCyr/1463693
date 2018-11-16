@@ -18,7 +18,15 @@ public class UsagerCourant {
     public static String getId(){
         String id;
 
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(siUsagerConnecte()){
+
+            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        }else{
+
+            id = "defaut";
+
+        }
 
         return id;
     }
