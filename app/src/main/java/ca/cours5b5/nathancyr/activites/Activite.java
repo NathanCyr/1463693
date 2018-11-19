@@ -8,6 +8,7 @@ import ca.cours5b5.nathancyr.donnees.Disque;
 import ca.cours5b5.nathancyr.donnees.SauvegardeTemporaire;
 import ca.cours5b5.nathancyr.donnees.Serveur;
 import ca.cours5b5.nathancyr.modeles.MParametres;
+import ca.cours5b5.nathancyr.donnees.Transition;
 
 
 public abstract class Activite extends AppCompatActivity {
@@ -24,6 +25,7 @@ public abstract class Activite extends AppCompatActivity {
     protected void initialiserControleurModeles(Bundle savedInstanceState) {
 
         ControleurModeles.setSequenceDeChargement(
+                new Transition(getIntent().getExtras()),
                 new SauvegardeTemporaire(savedInstanceState),
                 Serveur.getInstance(),
                 Disque.getInstance());

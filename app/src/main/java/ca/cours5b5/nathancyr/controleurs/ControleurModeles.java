@@ -11,8 +11,10 @@ import ca.cours5b5.nathancyr.donnees.ListenerChargement;
 import ca.cours5b5.nathancyr.donnees.Serveur;
 import ca.cours5b5.nathancyr.donnees.SourceDeDonnees;
 import ca.cours5b5.nathancyr.exceptions.ErreurModele;
+import ca.cours5b5.nathancyr.modeles.Identifiable;
 import ca.cours5b5.nathancyr.modeles.MParametres;
 import ca.cours5b5.nathancyr.modeles.MPartie;
+import ca.cours5b5.nathancyr.modeles.MPartieReseau;
 import ca.cours5b5.nathancyr.modeles.Modele;
 import ca.cours5b5.nathancyr.donnees.Disque;
 import ca.cours5b5.nathancyr.usagers.UsagerCourant;
@@ -101,6 +103,16 @@ public final class ControleurModeles {
                 }
             });
 
+    } else if (nomModele.equals(MPartieReseau.class.getSimpleName())) {
+            getModele(MParametres.class.getSimpleName(), new ListenerGetModele() {
+                @Override
+                public void reagirAuModele(Modele modele) {
+                    MParametres mParametres = (MParametres) modele;
+                    MPartieReseau mPartieReseau = new MPartieReseau(mParametres.getParametresPartie().cloner());
+                    listenerGetModele.reagirAuModele(mPartieReseau);
+                }
+            });
+
         } else {
 
             throw new ErreurModele("Modèle inconnu: " + nomModele);
@@ -183,8 +195,13 @@ public final class ControleurModeles {
 
     private static String getCheminSauvegarde(String nomModele) {
         String resultat;
+        Modele modele = modelesEnMemoire.get(nomModele);
 
-        resultat = nomModele + "/" + UsagerCourant.getId();
+        if(modele!=null && modele instanceof Identifiable){
+            resultat = nomModele + "/" + ((Identifiable) modele).getId();
+        }else{
+            resultat = nomModele + "/" + UsagerCourant.getId();
+        }
 
         return resultat;
     }
