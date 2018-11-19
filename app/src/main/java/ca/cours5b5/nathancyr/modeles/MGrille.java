@@ -6,9 +6,26 @@ import java.util.Map;
 
 import ca.cours5b5.nathancyr.exceptions.ErreurSerialisation;
 import ca.cours5b5.nathancyr.global.GCouleur;
+import ca.cours5b5.nathancyr.global.GDirection;
 
 
 public class MGrille extends Modele  {
+
+    public boolean siCouleurGagne(GCouleur couleur, int pourGagner){
+        return false;
+    }
+    public boolean siCouleurGagneCetteColonne(GCouleur couleur, int idColonne, int pourGagner){
+        return false;
+    }
+    public boolean siCouleurGagneCetteCase(GCouleur couleur, int idColonne, int idRangee, int pourGagner){
+        return false;
+    }
+    public boolean siCouleurGagneDansCetteDirection(GCouleur couleur, int idColonne, int idRangee, GDirection direction, int pourGagner){
+        return false;
+    }
+    public boolean siMemeCouleurCetteCasse(GCouleur couleur, int idColonne, int idRangee){
+        return false;
+    }
 
     private List<MColonne> colonnes;
 
