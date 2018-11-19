@@ -87,9 +87,6 @@ public class MPartie extends Modele implements Fournisseur {
 
             grille.placerJeton(colonne, couleurCourante);
 
-            if(grille.siCouleurGagne(couleurCourante,parametres.getPourGagner())){
-                ControleurPartie.getInstance().gagnerPartie(couleurCourante);
-            }
 
             prochaineCouleurCourante();
 

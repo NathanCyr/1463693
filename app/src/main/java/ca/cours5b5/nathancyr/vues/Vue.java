@@ -25,18 +25,5 @@ public abstract class Vue extends ConstraintLayout implements Fournisseur {
         super(context, attrs, defStyleAttr);
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        ControleurAction.fournirAction(this, GCommande.AFFICHER_GAGNANT, new ListenerFournisseur() {
-            @Override
-            public void executer(Object... args) {
-                String couleur = args[0].toString();
-                String message = "Les " + couleur + "s ont gagnés";
-                Snackbar fenetreMessage = Snackbar.make(Vue.this, message , Snackbar.LENGTH_SHORT);
-                fenetreMessage.show();
-            }
-        });
-    }
 
 }

@@ -1,5 +1,7 @@
 package ca.cours5b5.nathancyr.modeles;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +69,7 @@ public class MParametresPartie extends Modele {
 
     @Override
     public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurSerialisation  {
+        Log.d("test1", "aPartirObjetJson: " + objetJson) ;
         for(Map.Entry<String, Object> entry : objetJson.entrySet()){
 
             String chaineValeur = (String) entry.getValue();
@@ -94,6 +97,7 @@ public class MParametresPartie extends Modele {
                     throw new ErreurSerialisation("Attribut inconnu: " + entry.getKey());
             }
         }
+
     }
 
     @Override

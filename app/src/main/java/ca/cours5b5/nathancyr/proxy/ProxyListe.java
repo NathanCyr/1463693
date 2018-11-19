@@ -81,10 +81,17 @@ public class ProxyListe extends Proxy implements Fournisseur {
 
     @Override
     public void detruireValeurs() {
+        for(DatabaseReference noeud : noeudsAjoutes){
+            noeud.removeValue();
+        }
+
+    }
+
+    @Override
+    public void connecterAuServeur(){
         super.connecterAuServeur();
         creerListener();
         requete = getRequete();
         requete.addChildEventListener(childEventListener);
-
     }
 }

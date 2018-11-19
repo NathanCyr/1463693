@@ -1,5 +1,7 @@
 package ca.cours5b5.nathancyr.modeles;
 
+import android.util.Log;
+
 import java.util.Map;
 
 import ca.cours5b5.nathancyr.controleurs.ControleurAction;
@@ -15,12 +17,15 @@ public class MPartieReseau extends MPartie implements Fournisseur, Identifiable 
 
     @AttributSerialisable
     public String idJoueurInvite;
-    private String __idJoueurInvite = "idJoueurInvite";
+    private String __idJoueurInvite = "idJoueurInvite";;
+
     @AttributSerialisable
     public String idJoueurHote;
-    private String __idJoueurHote = "idJoueurHote";
+    private String __idJoueurHote = "idJoueurHote";;
+
     public MPartieReseau(MParametresPartie parametres) {
         super(parametres);
+        fournirActionRecevoirCoup();
     }
     @Override
     public String getId() {
@@ -63,11 +68,12 @@ public class MPartieReseau extends MPartie implements Fournisseur, Identifiable 
     }
 
     @Override
-    public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurSerialisation {
-        super.aPartirObjetJson(objetJson);
+    public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurSerialisation{
 
+        super.aPartirObjetJson(objetJson);
         idJoueurHote = (String) objetJson.get(__idJoueurHote);
         idJoueurInvite = (String) objetJson.get(__idJoueurInvite);
+
     }
 
     @Override
@@ -76,6 +82,7 @@ public class MPartieReseau extends MPartie implements Fournisseur, Identifiable 
 
         objetJson.put(__idJoueurHote, idJoueurHote);
         objetJson.put(__idJoueurInvite, idJoueurInvite);
+
 
         return objetJson;
     }

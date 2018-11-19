@@ -9,15 +9,12 @@ public final class ControleurPartie {
 
     }
 
-    private static final ControleurPartie instance = new ControleurPartie();
 
     public static ControleurPartie getInstance(){
         return null;
     }
 
     public void gagnerPartie(GCouleur couleurGagnante){
-        Action actionPourGagner = ControleurAction.demanderAction(GCommande.AFFICHER_GAGNANT);
-        actionPourGagner.setArguments(couleurGagnante);
-        actionPourGagner.executerDesQuePossible();
+
     }
 }

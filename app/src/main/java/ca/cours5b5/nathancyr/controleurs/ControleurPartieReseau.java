@@ -24,6 +24,7 @@ public class ControleurPartieReseau {
         ControleurModeles.getModele(MPartieReseau.class.getSimpleName(), new ListenerGetModele() {
             @Override
             public void reagirAuModele(Modele modele) {
+
                 MPartieReseau mPartieReseau = (MPartieReseau) modele;
                 connecterAuServeur(mPartieReseau.idJoueurHote);
             }
