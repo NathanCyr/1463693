@@ -1,15 +1,23 @@
 package ca.cours5b5.nathancyr.donnees;
 
+
 import java.util.Map;
 
+import ca.cours5b5.nathancyr.global.GConstantes;
 
 public abstract class SourceDeDonnees {
 
     public abstract void chargerModele(final String cheminSauvegarde, final ListenerChargement listenerChargement);
 
-    public abstract void sauvegarderModele(final String cheminSauvegarde, final Map<String, Object> objetJson);
+    public abstract void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson);
+
+    public abstract void detruireSauvegarde(String cheminSauvegarde);
 
     protected String getNomModele(String cheminSauvegarde){
-        return cheminSauvegarde.split("/")[0];
+
+        return cheminSauvegarde.split(GConstantes.SEPARATEUR_DE_CHEMIN)[0];
+
     }
+
+
 }

@@ -2,31 +2,29 @@ package ca.cours5b5.nathancyr.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ca.cours5b5.nathancyr.R;
 import ca.cours5b5.nathancyr.controleurs.ControleurAction;
+import ca.cours5b5.nathancyr.modeles.MPartieReseau;
+import ca.cours5b5.nathancyr.usagers.JoueursEnAttente;
+import ca.cours5b5.nathancyr.controleurs.ControleurModeles;
 import ca.cours5b5.nathancyr.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.nathancyr.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.nathancyr.global.GCommande;
-import ca.cours5b5.nathancyr.global.GConstantes;
-import ca.cours5b5.nathancyr.modeles.MPartieReseau;
+import ca.cours5b5.nathancyr.modeles.MParametres;
+
+import static ca.cours5b5.nathancyr.global.GConstantes.CODE_CONNEXION_FIREBASE;
 
 public class AMenuPrincipal extends Activite implements Fournisseur {
-
-    private static List<AuthUI.IdpConfig> fournisseurDeConnexion = new ArrayList<>();
-
-    static{
-        fournisseurDeConnexion.add(new AuthUI.IdpConfig.GoogleBuilder().build());
-        fournisseurDeConnexion.add(new AuthUI.IdpConfig.EmailBuilder().build());
-        fournisseurDeConnexion.add(new AuthUI.IdpConfig.PhoneBuilder().build());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,52 +35,64 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
 
     }
 
+
     private void fournirActions() {
 
-        fournirActionOuvrirMenuParametres();
+        fournirActionParametres();
 
         fournirActionDemarrerPartie();
 
-        fournirActionConnecter();
+        fournirActionConnexion();
+
+        fournirActionDeconnexion();
 
         fournirActionJoindreOuCreerPartieReseau();
+
     }
 
-    private void fournirActionConnecter(){
-        ControleurAction.fournirAction(this, GCommande.CONNEXION, new ListenerFournisseur() {
-            @Override
-            public void executer(Object... args) {
-                connexion();
-            }
-        });
-    }
 
     private void fournirActionJoindreOuCreerPartieReseau() {
+
         ControleurAction.fournirAction(this,
                 GCommande.JOINDRE_OU_CREER_PARTIE_RESEAU,
                 new ListenerFournisseur() {
                     @Override
                     public void executer(Object... args) {
-                        transitionPartieReseau();
+
+                            transitionAttendreAdversaire();
                     }
                 });
     }
 
-    private void fournirActionOuvrirMenuParametres() {
+
+    private void fournirActionDeconnexion() {
 
         ControleurAction.fournirAction(this,
-                GCommande.OUVRIR_MENU_PARAMETRES,
+                GCommande.DECONNEXION,
                 new ListenerFournisseur() {
                     @Override
                     public void executer(Object... args) {
 
-                        transitionParametres();
+                        effectuerDeconnexion();
 
                     }
                 });
     }
 
 
+    private void fournirActionConnexion() {
+
+        ControleurAction.fournirAction(this,
+                GCommande.CONNEXION,
+                new ListenerFournisseur() {
+                    @Override
+                    public void executer(Object... args) {
+
+                        effectuerConnexion();
+
+                    }
+                });
+    }
 
     private void fournirActionDemarrerPartie() {
 
@@ -98,41 +108,93 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
                 });
     }
 
+    private void fournirActionParametres() {
+        ControleurAction.fournirAction(this,
+                GCommande.OUVRIR_MENU_PARAMETRES,
+                new ListenerFournisseur() {
 
-    private void transitionParametres(){
+                    @Override
+                    public void executer(Object... args) {
+
+                        transitionParametres();
+
+                    }
+                });
+    }
+
+    private void transitionAttendreAdversaire() {
+
+        Intent intentionAttendreAdversaire = new Intent(this, AEnAttenteAdversaire.class);
+
+        startActivity(intentionAttendreAdversaire);
+
+    }
+
+
+    private void transitionParametres() {
 
         Intent intentionParametres = new Intent(this, AParametres.class);
         startActivity(intentionParametres);
 
     }
 
-    private void transitionPartie(){
+
+    private void transitionPartie() {
 
         Intent intentionPartie = new Intent(this, APartie.class);
         startActivity(intentionPartie);
 
     }
 
-    private void transitionPartieReseau(){
-        Intent intentionPartieReseau = new Intent(this, APartieReseau.class);
-        intentionPartieReseau.putExtra(MPartieReseau.class.getSimpleName(), GConstantes.FIXME_JSON_PARTIE_RESEAU);
-        startActivity(intentionPartieReseau);
+
+    private void effectuerConnexion() {
+
+        List<AuthUI.IdpConfig> fournisseursDeConnexion = new ArrayList<>();
+
+        fournisseursDeConnexion.add(new AuthUI.IdpConfig.GoogleBuilder().build());
+        fournisseursDeConnexion.add(new AuthUI.IdpConfig.EmailBuilder().build());
+        fournisseursDeConnexion.add(new AuthUI.IdpConfig.PhoneBuilder().build());
+
+        Intent intentionConnexion = AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(fournisseursDeConnexion)
+                .build();
+
+        this.startActivityForResult(intentionConnexion, CODE_CONNEXION_FIREBASE);
+
     }
 
-    private void connexion(){
-        Intent intentionConnexion = AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(fournisseurDeConnexion).build();
 
-        this.startActivityForResult(intentionConnexion, GConstantes.CODE_FIREBASE);
+    public void effectuerDeconnexion() {
+
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        // Rien
+
+                    }
+                });
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCOde, Intent data){
-        if(requestCode == GConstantes.CODE_FIREBASE){
-            if(resultCOde == RESULT_OK){
-                Log.d("Atelier 11: ", "onActivityResult: Reussi");
-            }else{
-                Log.d("Atelier 11: ", "onActivityResult: Echoue");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == CODE_CONNEXION_FIREBASE) {
+
+            //IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (resultCode == RESULT_OK) {
+
+                // Connexion réussie
+
+            } else {
+
+                // connexion échouée
             }
         }
     }
+
+
 }

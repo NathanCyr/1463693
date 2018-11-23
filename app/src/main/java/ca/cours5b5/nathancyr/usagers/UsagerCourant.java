@@ -2,32 +2,32 @@ package ca.cours5b5.nathancyr.usagers;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UsagerCourant {
+import ca.cours5b5.nathancyr.global.GConstantes;
+
+public final class UsagerCourant {
+
+    private UsagerCourant(){}
 
     public static boolean siUsagerConnecte(){
-        boolean connecter = false;
-
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            connecter = true;
-
-        }
-
-        return connecter;
+        return FirebaseAuth.getInstance().getUid() != null;
     }
 
     public static String getId(){
-        String id;
 
         if(siUsagerConnecte()){
 
-            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            return FirebaseAuth.getInstance().getUid();
 
         }else{
 
-            id = "defaut";
+            return GConstantes.ID_PAR_DEFAUT;
 
         }
-
-        return id;
     }
+
+    public static boolean estCeUsagerCourant(String idJoueur) {
+        return getId().equals(idJoueur);
+    }
+
+
 }

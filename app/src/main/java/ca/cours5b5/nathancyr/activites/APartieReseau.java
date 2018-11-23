@@ -3,31 +3,89 @@ package ca.cours5b5.nathancyr.activites;
 import android.os.Bundle;
 
 import ca.cours5b5.nathancyr.R;
+import ca.cours5b5.nathancyr.controleurs.ControleurAction;
+import ca.cours5b5.nathancyr.controleurs.ControleurModeles;
+import ca.cours5b5.nathancyr.controleurs.ControleurPartie;
 import ca.cours5b5.nathancyr.controleurs.ControleurPartieReseau;
 import ca.cours5b5.nathancyr.controleurs.interfaces.Fournisseur;
+import ca.cours5b5.nathancyr.controleurs.interfaces.ListenerFournisseur;
+import ca.cours5b5.nathancyr.donnees.SauvegardeTemporaire;
+import ca.cours5b5.nathancyr.donnees.Serveur;
+import ca.cours5b5.nathancyr.global.GCommande;
+import ca.cours5b5.nathancyr.global.GConstantes;
+import ca.cours5b5.nathancyr.modeles.MParametres;
+import ca.cours5b5.nathancyr.modeles.MPartieReseau;
+
 
 public class APartieReseau extends Activite implements Fournisseur {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partie_reseau);
+
+        fournirActionTerminerPartie();
+
+        ControleurPartieReseau.getInstance().connecterAuServeur();
+
     }
+
+
+    private void fournirActionTerminerPartie() {
+
+        ControleurAction.fournirAction(this,
+                GCommande.TERMINER_PARTIE,
+                new ListenerFournisseur() {
+                    @Override
+                    public void executer(Object... args) {
+
+                        // XXX: terminerPartie() est appelée sur onDestroy
+                        quitterCetteActivite();
+
+                    }
+                });
+    }
+
+
+    private void terminerPartie() {
+
+        String nomModele = MPartieReseau.class.getSimpleName();
+
+        ControleurPartieReseau.getInstance().deconnecterDuServeur();
+
+        ControleurModeles.detruireModele(nomModele);
+
+    }
+
+
     @Override
-    protected void onPause(){
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        String nomModele = MPartieReseau.class.getSimpleName();
+
+        ControleurModeles.sauvegarderModeleDansCetteSource(nomModele,
+                new SauvegardeTemporaire(outState));
+
+    }
+
+
+    @Override
+    protected void onPause() {
         super.onPause();
 
         ControleurPartieReseau.getInstance().detruireSauvegardeServeur();
-        ControleurPartieReseau.getInstance().deconnecterDuServeur();
+
     }
+
+
     @Override
-    protected void onResume(){
-        super.onResume();
-        ControleurPartieReseau.getInstance().connecterAuServeur();
-    }
-    @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
+
+        terminerPartie();
+
     }
+
 
 }

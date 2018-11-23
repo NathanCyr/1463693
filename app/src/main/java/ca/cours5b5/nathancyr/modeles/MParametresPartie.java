@@ -1,7 +1,5 @@
 package ca.cours5b5.nathancyr.modeles;
 
-import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,17 +21,7 @@ public class MParametresPartie extends Modele {
     public Integer pourGagner;
     protected final String __pourGagner = "pourGagner";
 
-
-    public MParametresPartie(){
-        super();
-
-        hauteur = GConstantes.HAUTEUR_PAR_DEFAUT;
-        largeur = GConstantes.LARGEUR_PAR_DEFAUT;
-        pourGagner = GConstantes.POUR_GAGNER_PAR_DEFAUT;
-
-    }
-
-    public MParametresPartie cloner(){
+    public MParametresPartie cloner() {
 
         MParametresPartie mParametresPartie = new MParametresPartie();
 
@@ -42,6 +30,16 @@ public class MParametresPartie extends Modele {
         mParametresPartie.setPourGagner(pourGagner);
 
         return mParametresPartie;
+
+    }
+
+
+    public MParametresPartie(){
+        super();
+
+        hauteur = GConstantes.HAUTEUR_PAR_DEFAUT;
+        largeur = GConstantes.LARGEUR_PAR_DEFAUT;
+        pourGagner = GConstantes.POUR_GAGNER_PAR_DEFAUT;
 
     }
 
@@ -67,9 +65,10 @@ public class MParametresPartie extends Modele {
         this.pourGagner = pourGagner;
     }
 
+
     @Override
     public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurSerialisation  {
-        Log.d("test1", "aPartirObjetJson: " + objetJson) ;
+
         for(Map.Entry<String, Object> entry : objetJson.entrySet()){
 
             String chaineValeur = (String) entry.getValue();
@@ -97,11 +96,12 @@ public class MParametresPartie extends Modele {
                     throw new ErreurSerialisation("Attribut inconnu: " + entry.getKey());
             }
         }
-
     }
+
 
     @Override
     public Map<String, Object> enObjetJson() throws ErreurSerialisation  {
+
         Map<String, Object> objetJson = new HashMap<>();
 
         objetJson.put(__hauteur, hauteur.toString());
@@ -111,5 +111,6 @@ public class MParametresPartie extends Modele {
         return objetJson;
 
     }
+
 
 }

@@ -11,17 +11,23 @@ public abstract class Proxy {
 
     public Proxy(String cheminServeur){
         this.cheminServeur = cheminServeur;
-
     }
 
     public void connecterAuServeur(){
+
         noeudServeur = FirebaseDatabase.getInstance().getReference(cheminServeur);
+
     }
 
     public void deconnecterDuServeur(){
         noeudServeur = null;
-        detruireValeurs();
+    }
+
+    protected boolean siConnecte(){
+        return noeudServeur != null;
     }
 
     public abstract void detruireValeurs();
+
+
 }

@@ -9,21 +9,12 @@ import ca.cours5b5.nathancyr.R;
 import ca.cours5b5.nathancyr.controleurs.Action;
 import ca.cours5b5.nathancyr.controleurs.ControleurAction;
 import ca.cours5b5.nathancyr.global.GCommande;
+import ca.cours5b5.nathancyr.usagers.UsagerCourant;
 
 
 public class VMenuPrincipal extends Vue {
 
-    private Button boutonParametres;
-    private Action actionParametres;
 
-    private Button boutonPartie;
-    private Action actionPartie;
-
-    private Button boutonConnexion;
-    private Action actionConnection;
-
-    private Button boutonEnLigne;
-    private Action actionEnLigne;
 
     public VMenuPrincipal(Context context) {
         super(context);
@@ -37,6 +28,20 @@ public class VMenuPrincipal extends Vue {
         super(context, attrs, defStyleAttr);
     }
 
+    private Button boutonParametres;
+    private Action actionParametres;
+
+    private Button boutonPartie;
+    private Action actionPartie;
+
+    private Button boutonPartieReseau;
+    private Action actionPartieReseau;
+
+    private Button boutonConnexion;
+    private Action actionConnexion;
+    private Action actionDeconnexion;
+
+
     @Override
     protected void onFinishInflate(){
         super.onFinishInflate();
@@ -47,6 +52,8 @@ public class VMenuPrincipal extends Vue {
 
         installerListeners();
 
+        ajusterTexteConnexionDeconnexion();
+
     }
 
 
@@ -56,10 +63,9 @@ public class VMenuPrincipal extends Vue {
 
         boutonPartie = findViewById(R.id.bouton_partie);
 
+        boutonPartieReseau = findViewById(R.id.bouton_partie_reseau);
+
         boutonConnexion = findViewById(R.id.bouton_connexion);
-
-        boutonEnLigne = findViewById(R.id.bouton_en_ligne);
-
 
     }
 
@@ -69,46 +75,17 @@ public class VMenuPrincipal extends Vue {
 
         actionPartie = ControleurAction.demanderAction(GCommande.DEMARRER_PARTIE);
 
-        actionConnection = ControleurAction.demanderAction(GCommande.CONNEXION);
+        actionPartieReseau = ControleurAction.demanderAction(GCommande.JOINDRE_OU_CREER_PARTIE_RESEAU);
 
-        actionEnLigne = ControleurAction.demanderAction(GCommande.JOINDRE_OU_CREER_PARTIE_RESEAU);
+        actionConnexion = ControleurAction.demanderAction(GCommande.CONNEXION);
+
+        actionDeconnexion = ControleurAction.demanderAction(GCommande.DECONNEXION);
+
 
     }
 
 
     private void installerListeners() {
-
-        installerListenerParametres();
-
-        installerListenerPartie();
-
-        installerListenerConnexion();
-
-        installerListenerEnLigne();
-
-    }
-
-    private void installerListenerEnLigne() {
-        boutonEnLigne.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionEnLigne.executerDesQuePossible();
-            }
-        });
-    }
-
-    private void installerListenerPartie() {
-
-        boutonPartie.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                actionPartie.executerDesQuePossible();
-            }
-        });
-
-    }
-
-    private void installerListenerParametres() {
 
         boutonParametres.setOnClickListener(new OnClickListener() {
             @Override
@@ -117,15 +94,51 @@ public class VMenuPrincipal extends Vue {
             }
         });
 
-    }
+        boutonPartie.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionPartie.executerDesQuePossible();
+            }
+        });
 
-    private void installerListenerConnexion(){
+        boutonPartieReseau.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionPartieReseau.executerDesQuePossible();
+            }
+        });
+
         boutonConnexion.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionConnection.executerDesQuePossible();
+
+                if(!UsagerCourant.siUsagerConnecte()){
+
+                    actionConnexion.executerDesQuePossible();
+                    boutonConnexion.setText(R.string.deconnexion);
+
+                }else{
+
+                    actionDeconnexion.executerDesQuePossible();
+                    boutonConnexion.setText(R.string.connexion);
+
+                }
+
             }
         });
+    }
+
+
+    private void ajusterTexteConnexionDeconnexion() {
+        if(UsagerCourant.siUsagerConnecte()){
+
+            boutonConnexion.setText(R.string.deconnexion);
+
+        }else{
+
+            boutonConnexion.setText(R.string.connexion);
+
+        }
     }
 
 }
