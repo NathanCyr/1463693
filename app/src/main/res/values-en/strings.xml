@@ -30,5 +30,7 @@
     <string name="ROUGE">red</string>
     <string name="JAUNE">yellow</string>
 
+    <string name="verifierConnexion">You need to be connected!</string>
+
 
 </resources>

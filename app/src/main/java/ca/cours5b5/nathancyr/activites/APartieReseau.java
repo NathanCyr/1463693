@@ -1,7 +1,11 @@
 package ca.cours5b5.nathancyr.activites;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import ca.cours5b5.nathancyr.R;
 import ca.cours5b5.nathancyr.controleurs.ControleurAction;
@@ -16,7 +20,7 @@ import ca.cours5b5.nathancyr.global.GCommande;
 import ca.cours5b5.nathancyr.global.GConstantes;
 import ca.cours5b5.nathancyr.modeles.MParametres;
 import ca.cours5b5.nathancyr.modeles.MPartieReseau;
-
+import ca.cours5b5.nathancyr.vues.VPartieReseau;
 
 
 public class APartieReseau extends Activite implements Fournisseur {
@@ -24,6 +28,7 @@ public class APartieReseau extends Activite implements Fournisseur {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partie_reseau);
 

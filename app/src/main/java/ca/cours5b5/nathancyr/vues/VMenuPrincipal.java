@@ -1,6 +1,7 @@
 package ca.cours5b5.nathancyr.vues;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import ca.cours5b5.nathancyr.R;
 import ca.cours5b5.nathancyr.controleurs.Action;
 import ca.cours5b5.nathancyr.controleurs.ControleurAction;
 import ca.cours5b5.nathancyr.global.GCommande;
+import ca.cours5b5.nathancyr.global.GConstantes;
 import ca.cours5b5.nathancyr.usagers.UsagerCourant;
 
 
@@ -106,7 +108,15 @@ public class VMenuPrincipal extends Vue {
         boutonPartieReseau.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                actionPartieReseau.executerDesQuePossible();
+                if(UsagerCourant.getId().equals(GConstantes.ID_PAR_DEFAUT)){
+                    Snackbar nonConnecter = Snackbar.make(v, getResources().getString(R.string.verifierConnexion), GConstantes.DELAIS_MESSAGE_AVEC_ACTION);
+                    nonConnecter.show();
+                    actionConnexion.executerDesQuePossible();
+                    boutonConnexion.setText(R.string.deconnexion);
+                }else{
+                    actionPartieReseau.executerDesQuePossible();
+                }
+
             }
         });
 
