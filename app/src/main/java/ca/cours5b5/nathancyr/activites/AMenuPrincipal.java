@@ -151,6 +151,10 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
 
     }
 
+    private void transitionPartieReseau(){
+        Intent intentionPartieReseau = new Intent(this, APartieReseau.class);
+        startActivity(intentionPartieReseau);
+    }
 
     private void effectuerConnexion() {
 
@@ -192,7 +196,7 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
 
             if (resultCode == RESULT_OK) {
 
-                // Connexion réussie
+                transitionPartieReseau();
 
             } else {
 
