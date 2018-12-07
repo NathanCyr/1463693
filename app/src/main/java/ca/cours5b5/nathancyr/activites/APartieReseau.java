@@ -1,6 +1,7 @@
 package ca.cours5b5.nathancyr.activites;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import ca.cours5b5.nathancyr.R;
 import ca.cours5b5.nathancyr.controleurs.ControleurAction;
@@ -17,7 +18,9 @@ import ca.cours5b5.nathancyr.modeles.MParametres;
 import ca.cours5b5.nathancyr.modeles.MPartieReseau;
 
 
+
 public class APartieReseau extends Activite implements Fournisseur {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class APartieReseau extends Activite implements Fournisseur {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        Log.d("Atelier", "APartie.onSaveInstanceState()");
         super.onSaveInstanceState(outState);
 
         String nomModele = MPartieReseau.class.getSimpleName();
@@ -81,6 +85,7 @@ public class APartieReseau extends Activite implements Fournisseur {
 
     @Override
     protected void onDestroy() {
+        Log.d("Atelier", "APartie.onDestroy()");
         super.onDestroy();
 
         terminerPartie();

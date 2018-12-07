@@ -55,7 +55,7 @@ public class MPartie extends Modele implements Fournisseur {
 
 
     private void initialiserGrille() {
-        grille = new MGrille(parametres.getLargeur());
+        grille = new MGrille(parametres.getLargeur(), parametres.getHauteur());
     }
 
 

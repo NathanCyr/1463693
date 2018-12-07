@@ -1,6 +1,7 @@
 package ca.cours5b5.nathancyr.activites;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import ca.cours5b5.nathancyr.R;
 import ca.cours5b5.nathancyr.controleurs.ControleurAction;
@@ -14,6 +15,7 @@ public class APartie extends Activite implements Fournisseur {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Atelier", "APartie.onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partie);
 
@@ -39,6 +41,7 @@ public class APartie extends Activite implements Fournisseur {
 
     @Override
     protected void onPause() {
+        Log.d("Atelier", "APartie.onPause()");
         super.onPause();
         sauvegarderPartie();
     }

@@ -37,6 +37,7 @@ public class VPartie extends Vue {
 
     @Override
     protected void onFinishInflate() {
+        Log.d("Atelier", "APartie.onFinishInflate()");
         super.onFinishInflate();
 
         initialiser();
@@ -170,6 +171,10 @@ public class VPartie extends Vue {
     private void miseAJourGrille(MPartie partie){
 
         grille.afficherJetons(partie.getGrille());
+
+        grille.desactiverEnTete(partie.getGrille());
+
+        grille.desactiverTousEnTetes(partie.getGrille());
 
     }
 

@@ -16,11 +16,20 @@ import ca.cours5b5.nathancyr.serialisation.AttributSerialisable;
 public class MGrille extends Modele  {
 
     private List<MColonne> colonnes;
+    public int hauteur;
+    public boolean partieGagne = false;
+
+    public boolean getPartieGagne(){
+        return this.partieGagne;
+    }
 
 
-    public MGrille(int largeur){
+    public MGrille(int largeur, int hauteur){
+
 
         colonnes = new ArrayList<>();
+
+        this.hauteur = hauteur;
 
         initialiserColonnes(largeur);
 
@@ -70,7 +79,7 @@ public class MGrille extends Modele  {
         for(int idColonne = 0; idColonne < colonnes.size(); idColonne++){
 
             if(siCouleurGagneCetteColonne(couleur, idColonne, pourGagner)){
-
+                partieGagne = true;
                 return true;
 
             }
@@ -148,6 +157,17 @@ public class MGrille extends Modele  {
         }
 
         return false;
+    }
+
+    public boolean siColonneRemplie(int indColonne){
+        boolean remplie = false;
+        MColonne colonne = colonnes.get(indColonne);
+
+        if(colonne.getJetons().size() == this.hauteur){
+            remplie = true;
+        }
+
+        return remplie;
     }
 
 

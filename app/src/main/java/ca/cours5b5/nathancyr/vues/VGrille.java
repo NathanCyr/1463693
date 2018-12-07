@@ -205,4 +205,20 @@ public class VGrille extends GridLayout {
 
     }
 
+    public void desactiverEnTete(MGrille grille){
+        for(int i = 0; i < entetes.size(); i++){
+            if(grille.siColonneRemplie(i)){
+                entetes.get(i).setEnabled(false);
+            }
+        }
+    }
+
+    public void desactiverTousEnTetes(MGrille grille){
+        if(grille.getPartieGagne()){
+            for(int i = 0; i < entetes.size(); i++){
+                entetes.get(i).setEnabled(false);
+            }
+        }
+    }
+
 }
